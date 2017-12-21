@@ -20,4 +20,17 @@ class Question extends Model
     {
         return $this->hasMany('App\Answer');
     }
+
+    public static function getAllQuestions()
+    {
+        $models = Question::all();
+
+        $result = [];
+
+        foreach ($models as $model) {
+            $result[$model->id] = $model->title;
+        }
+
+        return $result;
+    }
 }

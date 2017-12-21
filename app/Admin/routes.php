@@ -16,4 +16,6 @@ Route::group([
 
     $router->resource('tests', 'TestsController');
 
+    $router->resource('questions', 'QuestionsController');
+
 });
