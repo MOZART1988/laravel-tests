@@ -21,8 +21,7 @@ class LecturesController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Лекции');
 
             $content->body($this->grid());
         });
@@ -38,8 +37,9 @@ class LecturesController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $lecture = Lecture::find($id);
+
+            $content->header('Редактировать лекцию ' . $lecture->title);
 
             $content->body($this->form()->edit($id));
         });
@@ -54,8 +54,7 @@ class LecturesController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Создать лекцию');
 
             $content->body($this->form());
         });
@@ -72,14 +71,12 @@ class LecturesController extends Controller
             $grid->disableExport();
             $grid->disableRowSelector();
 
-
             $grid->id('ID')->sortable();
-            $grid->title('Title')->sortable();
-            $grid->description('Description')->sortable();
-            $grid->youtube_video('Youtube video link')->sortable();
+            $grid->title('Название')->sortable();
+            $grid->description('Описание')->sortable();
+            $grid->youtube_video('Youtube видео')->sortable();
 
-            $grid->created_at();
-            $grid->updated_at();
+            $grid->created_at('Дата создания')->sortable();
         });
     }
 
@@ -93,12 +90,11 @@ class LecturesController extends Controller
         return Admin::form(Lecture::class, function (Form $form) {
 
             $form->display('id', 'ID');
-            $form->text('title');
-            $form->textarea('description');
-            $form->text('youtube_video');
+            $form->text('title', 'Название')->placeholder('Название');
+            $form->textarea('description', 'Описание')->placeholder('Описание');
+            $form->text('youtube_video', 'Видео ютуб')->placeholder('Видео ютуб');
 
-            $form->display('created_at', 'Created At');
-            $form->display('updated_at', 'Updated At');
+            $form->display('created_at', 'Дата создания');
         });
     }
 
