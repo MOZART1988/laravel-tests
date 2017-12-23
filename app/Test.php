@@ -20,4 +20,17 @@ class Test extends Model
     {
         return $this->hasMany('App\Question');
     }
+
+    public static function getAllTests()
+    {
+        $models = Test::all();
+
+        $result = [];
+
+        foreach ($models as $model) {
+            $result[$model->id] = $model->title;
+        }
+
+        return $result;
+    }
 }
