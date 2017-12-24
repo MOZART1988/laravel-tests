@@ -9,4 +9,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Administrator
 {
     use Notifiable;
+
+    public function tests()
+    {
+        return $this->belongsToMany('App\Test', 'results', 'user_id', 'test_id');
+    }
 }

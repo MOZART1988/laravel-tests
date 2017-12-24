@@ -23,4 +23,10 @@ Route::get('/lectures', 'LecturesController@index');
 Route::get('/lectures/show/{id}', 'LecturesController@show');
 Route::get('/lectures/tests/{id}', 'LecturesController@tests');
 
-Route::get('/tests/show/{id}', 'TestsController@show');
+Route::get('/tests/show/{id}', 'TestsController@show')->middleware('auth');
+
+Route::get('/question/{id}', 'TestsController@question')->middleware('auth');
+Route::post('/question/{id}', 'TestsController@question')->middleware('auth');
+Route::get('/results/{id}', 'TestsController@results')->middleware('auth');
+
+Route::get('/profile', 'UsersController@profile')->middleware('auth');

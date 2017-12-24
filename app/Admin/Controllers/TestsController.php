@@ -123,7 +123,9 @@ class TestsController extends Controller
             $grid->disableRowSelector();
             $grid->id('ID')->sortable();
             $grid->title('Название')->sortable();
-            $grid->lecture_id('Лекция')->sortable();
+            $grid->lecture_id('Лекция')->display(function(){
+                return Lecture::find($this->lecture_id)->title;
+            })->sortable();
             $grid->created_at('Дата создания');
         });
     }

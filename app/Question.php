@@ -21,6 +21,11 @@ class Question extends Model
         return $this->hasMany('App\Answer');
     }
 
+    public function getNext()
+    {
+        return Question::where('id', '>', $this->id)->orderBy('id')->first();
+    }
+
     public static function getAllQuestions()
     {
         $models = Question::all();

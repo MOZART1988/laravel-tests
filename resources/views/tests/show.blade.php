@@ -8,7 +8,7 @@
                     <div class="panel-heading">{{$test->title}}</div>
                     <div class="panel-body">
                         <p>{{$test->description}}</p>
-                        <a href="/question/{{$question->id}}">Начать тест</a>
+                        <a href="/question/{{$firstQuestion->id}}">РќР°С‡Р°С‚СЊ С‚РµСЃС‚</a>
                     </div>
                 </div>
             </div>

@@ -125,7 +125,9 @@ class QuestionsController extends Controller
             $grid->disableRowSelector();
 
             $grid->id('ID')->sortable();
-            $grid->test_id('Тест')->sortable();
+            $grid->test_id('Тест')->display(function(){
+                return Test::find($this->test_id)->title;
+            })->sortable();
             $grid->question('Вопрос')->sortable();
 
             $grid->created_at('Дата создания');
