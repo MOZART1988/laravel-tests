@@ -18,4 +18,6 @@ Route::group([
 
     $router->resource('questions', 'QuestionsController');
 
+    $router->resource('answers', 'AnswersController');
+
 });

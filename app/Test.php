@@ -8,7 +8,8 @@ class Test extends Model
 {
     protected $fillable = [
         'lecture_id',
-        'title'
+        'title',
+        'description'
     ];
 
     public function lecture()

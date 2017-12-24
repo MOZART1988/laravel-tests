@@ -24,8 +24,7 @@ class QuestionsController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Вопросы');
 
             $content->body($this->grid());
         });
@@ -40,8 +39,7 @@ class QuestionsController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Создать вопрос');
 
             $content->body($this->form());
         });
@@ -62,7 +60,7 @@ class QuestionsController extends Controller
 
         Question::create($request->all());
 
-        return redirect()->route('tests.index');
+        return redirect()->route('questions.index');
     }
 
     /**
@@ -75,8 +73,9 @@ class QuestionsController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $question = Question::find($id);
+
+            $content->header('Редактировать вопрос ' . $question->question);
 
             $content->body($this->form()->edit($id));
         });
@@ -92,13 +91,13 @@ class QuestionsController extends Controller
     public function update(Request $request, Question $question)
     {
         $this->validate($request, [
-            'title' => 'required',
+            'question' => 'required',
             'lecture_id' => 'required'
         ]);
 
         $question->update($request->all());
 
-        return redirect()->route('tests.index');
+        return redirect()->route('questions.index');
     }
 
     /**
@@ -129,8 +128,7 @@ class QuestionsController extends Controller
             $grid->test_id('Тест')->sortable();
             $grid->question('Вопрос')->sortable();
 
-            $grid->created_at();
-            $grid->updated_at();
+            $grid->created_at('Дата создания');
         });
     }
 

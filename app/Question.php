@@ -28,7 +28,7 @@ class Question extends Model
         $result = [];
 
         foreach ($models as $model) {
-            $result[$model->id] = $model->title;
+            $result[$model->id] = $model->question;
         }
 
         return $result;
