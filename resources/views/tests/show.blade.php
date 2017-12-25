@@ -8,7 +8,11 @@
                     <div class="panel-heading">{{$test->title}}</div>
                     <div class="panel-body">
                         <p>{{$test->description}}</p>
-                        <a href="/question/{{$firstQuestion->id}}">Начать тест</a>
+                        @if($firstQuestion !== null)
+                            <a href="/question/{{$firstQuestion->id}}">Начать тест</a>
+                        @else
+                            <p>Тест пока не готов</p> <a href="/lectures">К списку лекций</a>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -8,9 +8,9 @@
                     <div class="panel-heading">{{$user->name}}</div>
                     <div class="panel-body">
                         <h3>Пройденные тесты</h3>
-                        @isset($user->tests)
+                        @isset($tests)
                             <ul>
-                                @foreach($user->tests as $test)
+                                @foreach($tests as $test)
                                     <li><a href="/results/{{$test->id}}}">{{$test->title}}</a></li>
                                 @endforeach
                             </ul>

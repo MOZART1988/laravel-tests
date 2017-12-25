@@ -21,7 +21,7 @@ class TestsController extends Controller
     {
         $test = Test::find($id);
 
-        $firstQuestion = Question::orderBy('id')->first();
+        $firstQuestion = Question::where('test_id', '=', $id)->orderBy('id')->first();
 
         Results::with('user_id', '=', Auth::user()->id)->where('test_id', '=', $id)->delete();
 

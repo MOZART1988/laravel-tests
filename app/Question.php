@@ -23,7 +23,7 @@ class Question extends Model
 
     public function getNext()
     {
-        return Question::where('id', '>', $this->id)->orderBy('id')->first();
+        return Question::where('id', '>', $this->id)->where('test_id', '=', $this->test_id)->orderBy('id')->first();
     }
 
     public static function getAllQuestions()
