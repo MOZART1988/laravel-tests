@@ -8,7 +8,8 @@ class Test extends Model
 {
     protected $fillable = [
         'lecture_id',
-        'title'
+        'title',
+        'description'
     ];
 
     public function lecture()
@@ -19,6 +20,11 @@ class Test extends Model
     public function questions()
     {
         return $this->hasMany('App\Question');
+    }
+
+    public function results()
+    {
+        return $this->hasMany('App\Results');
     }
 
     public static function getAllTests()

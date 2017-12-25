@@ -142,12 +142,12 @@ class LecturesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  Lecture  $question
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function destroy(Lecture $lecture)
     {
         $lecture->delete();
 
-        return redirect()->route('lectures.index');
+        return ['success' => true];
     }
 }

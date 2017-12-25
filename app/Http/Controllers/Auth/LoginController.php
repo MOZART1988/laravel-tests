@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Encore\Admin\Controllers\AuthController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
+    public function username()
+    {
+        return 'username';
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Login Controller

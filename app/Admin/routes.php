@@ -11,11 +11,11 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
-
     $router->resource('lectures', 'LecturesController');
-
     $router->resource('tests', 'TestsController');
-
     $router->resource('questions', 'QuestionsController');
+    $router->resource('answers', 'AnswersController');
+
+    $router->get('/results', 'ResultsController@index');
 
 });

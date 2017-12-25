@@ -22,8 +22,7 @@ class TestsController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Тесты');
 
             $content->body($this->grid());
         });
@@ -38,8 +37,7 @@ class TestsController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Создать тест');
 
             $content->body($this->form());
         });
@@ -55,7 +53,8 @@ class TestsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'lecture_id' => 'required'
+            'lecture_id' => 'required',
+            'description' => 'required',
         ]);
 
         Test::create($request->all());
@@ -71,9 +70,9 @@ class TestsController extends Controller
     public function edit($id)
     {
         return Admin::content(function (Content $content) use ($id) {
+            $test = Test::find($id);
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('Редактировать тест ' . $test->title);
 
             $content->body($this->form()->edit($id));
         });
@@ -90,7 +89,8 @@ class TestsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'lecture_id' => 'required'
+            'lecture_id' => 'required',
+            'description' => 'required',
         ]);
 
         $test->update($request->all());
@@ -121,13 +121,12 @@ class TestsController extends Controller
         return Admin::grid(Test::class, function (Grid $grid) {
             $grid->disableExport();
             $grid->disableRowSelector();
-
             $grid->id('ID')->sortable();
-            $grid->title('Title')->sortable();
-            $grid->lecture_id('Lecture')->sortable();
-
-            $grid->created_at();
-            $grid->updated_at();
+            $grid->title('Название')->sortable();
+            $grid->lecture_id('Лекция')->display(function(){
+                return Lecture::find($this->lecture_id)->title;
+            })->sortable();
+            $grid->created_at('Дата создания');
         });
     }
 
@@ -141,11 +140,11 @@ class TestsController extends Controller
         return Admin::form(Test::class, function (Form $form) {
 
             $form->display('id', 'ID');
-            $form->text('title');
-            $form->select('lecture_id', 'Lecture')->options(Lecture::getAllLectures());
+            $form->text('title', 'Название');
+            $form->select('lecture_id', 'Лекция')->options(Lecture::getAllLectures());
+            $form->textarea('description', 'Описание');
 
-            $form->display('created_at', 'Created At');
-            $form->display('updated_at', 'Updated At');
+            $form->display('created_at', 'Дата создания');
         });
     }
 }
